@@ -73,9 +73,9 @@
 
   .hero h1 {
     font-family: 'Syne', sans-serif;
-    font-size: clamp(2.0rem, 4.8vw, 3.8rem);
-    font-weight: 800; line-height: 1.02; letter-spacing: -0.5px;
-    color: #F4FBF9; margin-bottom: 22px;
+    font-size: clamp(1.7rem, 4.2vw, 3.8rem);
+    font-weight: 800; line-height: 1.05; letter-spacing: -0.5px;
+    color: #F4FBF9; margin-bottom: 22px; word-break: break-word;
   }
   .hero h1 .a1 { color: var(--teal-light); }
   .hero h1 .a2 { color: var(--amber); }
@@ -292,12 +292,12 @@
     </div>
     <h1>
       Dein<br>
-      Gesundheitscheck<br>
-      vor dem<br>
+      Gesundheits-<br>
+      check vor dem<br>
       <span class="a1">Auslands</span><span class="a2">jahr.</span>
     </h1>
     <p class="hero-sub">
-      Alles, was du über die Gesundheitsvorsorge wissen musst — Schritt für Schritt erklärt, damit du entspannt ausreisen kannst.
+      Alles, was du über die Vor-Ausreise-Untersuchung nach <strong style="color:var(--teal-light)">G-35</strong> wissen musst — Schritt für Schritt erklärt, damit du fit und entspannt ausreisen kannst.
     </p>
     <div class="hero-stats">
       <div class="stat"><span class="stat-n">5</span><span class="stat-l">Schritte</span></div>
@@ -323,6 +323,9 @@
   <section class="section fi" id="schritte">
     <div class="sl">Los geht's</div>
     <h2 class="st">In 5 Schritten zur Ausreise 🌍</h2>
+    <p style="color:var(--muted);font-size:.95rem;margin-bottom:28px;line-height:1.72;">
+      Als weltwärts-Freiwige*r bist du verpflichtet, vor der Ausreise eine standardisierte Gesundheitsuntersuchung nach <strong>G-35/E-35</strong> durchführen zu lassen. Das ist ein Untersuchungsstandard speziell für Auslandsaufenthalte in tropischen und subtropischen Regionen — die Ärztin oder der Arzt kennt ihn. Nach deiner Rückkehr ist eine Nachsorge-Untersuchung ebenfalls Pflicht.
+    </p>
 
     <div class="steps">
 
@@ -330,10 +333,10 @@
         <div class="step-n">1</div>
         <div class="step-body">
           <div class="step-title">Arzt mit Qualifikation finden & Termin vereinbaren</div>
-          <p class="step-text">Frag zuerst deine <strong>Hausärztin / deinen Hausarzt</strong>, ob die Untersuchung dort gemacht werden kann. Falls nicht, hilft die DTG-Arztsuche weiter (→ Abschnitt "Arzt finden").</p>
+          <p class="step-text">Du brauchst eine Ärztin oder einen Arzt, der die G-35-Untersuchung durchführen kann. <strong>Fang mit deiner Hausarztpraxis an</strong> — viele bieten das an. Falls nicht, hilft die DTG-Arztliste weiter.</p>
           <div class="alert alert-teal">
             <span class="alert-icon">📱</span>
-            <span>Noch nicht sicher welchen Arzt? → Abschnitt <strong>"Welchen Arzt anrufen?"</strong> hilft dir weiter.</span>
+            <span>Welche Qualifikation der Arzt braucht, was du beim Anruf sagst und wie du einen findest → Abschnitt <strong>"Welchen Arzt anrufen?"</strong> weiter unten.</span>
           </div>
         </div>
       </div>
@@ -341,11 +344,19 @@
       <div class="step">
         <div class="step-n">2</div>
         <div class="step-body">
-          <div class="step-title">Bescheinigung von der VEM erhalten & ausdrucken</div>
-          <p class="step-text">Du bekommst das <strong>Formular "Bescheinigung Vor-Ausreise-Untersuchung"</strong> bereits ausgefüllt per E-Mail von der VEM. <strong>Drucke es aus und bring es zum Termin mit</strong> — der Arzt unterschreibt und stempelt es dort direkt. Falls Zusatzuntersuchungen nötig waren, trägt der Arzt die Begründung im Formular ein.</p>
+          <div class="step-title">Bescheinigung von der VEM & Dokumente für den Arzt vorbereiten</div>
+          <p class="step-text">Du bekommst das <strong>Formular "Bescheinigung Vor-Ausreise-Untersuchung"</strong> per E-Mail von der VEM — es ist bereits ausgefüllt. <strong>Drucke es aus und bring es zum Termin mit.</strong> Der Arzt unterschreibt und stempelt es.</p>
+          <div class="alert alert-teal">
+            <span class="alert-icon">📎</span>
+            <div>
+              <strong>Diese zwei Dokumente brauchst du beim Termin</strong> — lies sie vorher kurz durch:<br><br>
+              → <a href="https://www.weltwaerts.de/files/media/dokumente_dc/de/Organisationen/Foerdermittel-fuer-Entsendungen/Anlage_2a_Basisleistungskatalog_Vor_Ausreise_Untersuchung.pdf" target="_blank" style="color:var(--teal);font-weight:600;">Basisleistungskatalog (Anlage 2a)</a> — zeigt dem Arzt, welche Leistungen im Festpreis enthalten sind<br>
+              → <a href="https://www.weltwaerts.de/files/media/dokumente_dc/de/Organisationen/Foerdermittel-fuer-Entsendungen/Merkblatt-fuer-Aerztinnen_und_Aerzte.pdf" target="_blank" style="color:var(--teal);font-weight:600;">Merkblatt für Ärzt*innen</a> — erklärt dem Arzt das weltwärts-Untersuchungsverfahren
+            </div>
+          </div>
           <div class="alert alert-yellow">
             <span class="alert-icon">📧</span>
-            <span>Noch kein Formular? Schreib deiner <strong>Ansprechperson bei der VEM</strong> — sie schickt es dir zu.</span>
+            <span>Noch keine Bescheinigung per E-Mail erhalten? Melde dich bei deiner <strong>Ansprechperson bei der VEM</strong>.</span>
           </div>
         </div>
       </div>
@@ -406,23 +417,39 @@
     <h2 class="st">Welchen Arzt soll ich anrufen? 📱</h2>
 
     <p style="color:var(--muted);margin-bottom:20px;font-size:.97rem;">
-      Du brauchst keinen speziellen Arzt zu suchen — <strong>fang einfach mit deinem Hausarzt an.</strong>
+      Fang einfach mit deinem Hausarzt an. Viele führen die G-35-Untersuchung durch — falls nicht, hilft die DTG-Arztsuche.
     </p>
 
     <div class="big-cl">
       <div class="big-cl-item">
         <div class="big-cl-icon">🏠</div>
-        <div><strong>Schritt 1: Ruf deinen Hausarzt an</strong> und frag, ob sie die weltwärts-Vorsorgeuntersuchung durchführen können. Viele können das — dann bist du fertig mit der Suche.</div>
+        <div><strong>Schritt 1: Ruf deinen Hausarzt an</strong> und frag, ob er die weltwärts-Vorsorgeuntersuchung (G-35) durchführen kann. Viele können das — dann bist du fertig mit der Suche.</div>
       </div>
       <div class="big-cl-item">
         <div class="big-cl-icon am">🔍</div>
-        <div><strong>Schritt 2: Falls nicht,</strong> nutze die Arztsuche der DTG. Dort findest du qualifizierte Ärzt*innen in deiner Nähe: <a href="https://dtg.org/index.php/liste-tropenmedizinischer-institutionen/arztsuche.html" target="_blank" style="color:var(--teal);font-weight:600;">dtg.org → Arztsuche</a></div>
+        <div><strong>Schritt 2: Falls nicht,</strong> nutze die DTG-Arztsuche für qualifizierte Ärzte in deiner Nähe: <a href="https://dtg.org/index.php/liste-tropenmedizinischer-institutionen/arztsuche.html" target="_blank" style="color:var(--teal);font-weight:600;">dtg.org → Arztsuche</a></div>
       </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <div class="card-title">🩺 Welche Qualifikation muss der Arzt haben?</div>
+      <ul class="cl">
+        <li><strong>Tropenmediziner*in</strong> — immer möglich, erste Wahl</li>
+        <li><strong>Reisemediziner*in mit DFR-Fachzertifikat</strong> — nach 128-Std.-Kurs Reisemedizin oder 3-monatigem Tropenmedizin-Diplom</li>
+        <li><strong>Arbeits- oder Betriebsmediziner*in</strong> mit Zertifikat „Arbeitsaufenthalt in den Tropen und Subtropen"</li>
+      </ul>
     </div>
 
     <div class="alert alert-teal" style="margin-top:14px;">
       <span class="alert-icon">📞</span>
-      <div>Beim Anruf einfach sagen: <em>"Ich mache ein weltwärts-Freiwilligenjahr und brauche eine Vor-Ausreise-Untersuchung für eine tropische Region."</em> — die Praxis weiß dann, was gemeint ist.</div>
+      <div>Beim Anruf einfach sagen: <em>"Ich mache ein weltwärts-Freiwilligenjahr und brauche eine Vor-Ausreise-Untersuchung nach G-35 für eine tropische Region."</em></div>
+    </div>
+
+    <div class="alert alert-yellow" style="margin-top:10px;">
+      <span class="alert-icon">⚠️</span>
+      <div>
+        <strong>Wichtig:</strong> Der Arzt muss bereit sein, nach dem weltwärts-Basisleistungskatalog und dessen Höchstsätzen abzurechnen. Wenn er das ablehnt, kann er die Untersuchung im Rahmen von weltwärts nicht durchführen — dann einfach eine andere Praxis suchen.
+      </div>
     </div>
 
     <div class="alert alert-yellow" style="margin-top:10px;">
@@ -438,12 +465,12 @@
     <div class="dark-box">
       <div class="sl">Was wird erstattet</div>
       <h2 class="st">Kosten & Erstattung</h2>
-      <p class="intro">Der Arzt rechnet nach einem festen Katalog ab — du musst das nicht prüfen. Wichtig für dich: Es gibt einen Höchstbetrag bis zu dem die VEM erstattet. Alle Laborwerte sind darin enthalten.</p>
+      <p class="intro">Die Untersuchung folgt einem festen Katalog (G-35/E-35-Standard) — du musst die Einzelposten nicht prüfen. Wichtig für dich: Die VEM erstattet bis zum Höchstbetrag. Inklusive Laborwerte, EKG und Beratung.</p>
 
       <div class="k-grid">
-        <div class="k-item">🩸 Großes Blutbild + Differenzierung</div>
-        <div class="k-item">📋 Ganzkörperstatus & Anamnese</div>
-        <div class="k-item">🧪 Leber-, Nieren-, Blutzucker- & Entzündungswerte</div>
+        <div class="k-item">🩸 Großes Blutbild + Differenzierung + BSG</div>
+        <div class="k-item">📋 Ganzkörperstatus & ausführliche Anamnese</div>
+        <div class="k-item">🧪 Leber-, Nieren-, Blutzucker- & Entzündungswerte (CRP)</div>
         <div class="k-item">🦠 HIV-Antikörper & Ferritin</div>
         <div class="k-item">❤️ Ruhe-EKG</div>
         <div class="k-item">💊 TSH (Schilddrüse) oder Cholesterin</div>
@@ -458,6 +485,11 @@
         </div>
         <div class="kt-num">227,83 €</div>
       </div>
+    </div>
+
+    <div class="alert alert-teal" style="margin-top:0;">
+      <span class="alert-icon">📥</span>
+      <div>Den vollständigen Basisleistungskatalog kannst du hier herunterladen und bei Bedarf dem Arzt mitgeben: <a href="https://www.weltwaerts.de/files/media/dokumente_dc/de/Organisationen/Foerdermittel-fuer-Entsendungen/Anlage_2a_Basisleistungskatalog_Vor_Ausreise_Untersuchung.pdf" target="_blank" style="color:var(--teal);font-weight:600;">Anlage 2a Basisleistungskatalog (PDF)</a></div>
     </div>
 
 <div class="card" style="margin-top:14px;">
@@ -495,6 +527,13 @@
       <span class="alert-icon">✅</span>
       <div>
         <strong>Was wird erstattet:</strong> Reiseimpfungen, die von <strong>STIKO</strong>, <strong>CRM</strong> oder dem <strong>Auswärtigen Amt</strong> für deinen Einsatzort empfohlen werden — inklusive Impfberatung. Dazu Malaria-Prophylaxe (Standard bis 3 Monate; mit ärztl. Empfehlung bis 1 Jahr).
+      </div>
+    </div>
+
+    <div class="alert alert-amber" style="margin-top:10px;">
+      <span class="alert-icon">💛</span>
+      <div>
+        <strong>Gelbfieber-Impfung:</strong> Fast alle Einsatzländer im Globalen Süden empfehlen oder verlangen die Gelbfieber-Impfung. <strong>Frag deinen Arzt oder deine Ärztin aktiv danach</strong> — sie wird nicht immer automatisch erwähnt. Die Impfung gilt lebenslang und muss von einem zertifizierten Gelbfieber-Impfzentrum durchgeführt werden.
       </div>
     </div>
 
@@ -541,6 +580,10 @@
         <div class="big-cl-icon am">📋</div>
         <div><strong>VEM-Abrechnungsformular</strong> — wird dir separat von der VEM zugeschickt. Ohne dieses Formular kann keine Erstattung erfolgen.</div>
       </div>
+      <div class="big-cl-item">
+        <div class="big-cl-icon">📬</div>
+        <div><strong>Ablehnungsbescheid der Krankenkasse</strong> — nur falls du einen erhalten hast (z.B. bei Impfungen oder Zusatzuntersuchungen). Muss zwingend beigelegt werden.</div>
+      </div>
     </div>
 
     <div class="alert alert-amber">
@@ -561,7 +604,7 @@
         <div class="tl-dot"></div>
         <div class="tl-time">Schritt 2</div>
         <div class="tl-title">Alles an die VEM</div>
-        <div class="tl-text">Rechnung + Bescheinigung + Abrechnungsformular an deine Ansprechperson.</div>
+        <div class="tl-text">Rechnung + (ggf. Ablehnungsbescheid der KK) + Bescheinigung + Abrechnungsformular an deine Ansprechperson.</div>
       </div>
       <div class="tl-item">
         <div class="tl-dot"></div>
@@ -595,7 +638,7 @@
 
     <div class="faq-item">
       <div class="faq-q">Kann ich zur Hausärztin / zum Hausarzt gehen? <span class="arr">▼</span></div>
-      <div class="faq-a">Ja — das ist sogar der erste empfohlene Schritt! Frag einfach, ob sie die weltwärts-Vorsorgeuntersuchung durchführen können. Haben sie die Qualifikation, ist das perfekt. Falls nicht, hilft die DTG-Arztsuche weiter.</div>
+      <div class="faq-a">Ja — das ist sogar der erste empfohlene Schritt! Frag einfach, ob sie die weltwärts-Vorsorgeuntersuchung nach G-35 durchführen können. Haben sie die Qualifikation, ist das perfekt. Falls nicht, hilft die <a href="https://dtg.org/index.php/liste-tropenmedizinischer-institutionen/arztsuche.html" target="_blank" style="color:var(--teal)">DTG-Arztsuche</a> weiter.</div>
     </div>
 
     <div class="faq-item">
@@ -640,7 +683,7 @@
     <h2>Alles klar? Dann los! 🚀</h2>
     <p>Vereinbare deinen Termin und melde dich bei Fragen jederzeit bei deiner Ansprechperson bei der VEM.</p>
     <a href="https://dtg.org/index.php/liste-tropenmedizinischer-institutionen/arztsuche.html" target="_blank" class="btn btn-white">
-      🔍 Ärzt*innen-Suche (DTG)
+      🔍 Arztsuche (DTG)
     </a>
   </div>
 
