@@ -5,3 +5,354 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>weltwärts – Volunteer Profile</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --warm: #f5ede0;
+    --accent: #c85a2a;
+    --gold: #d4a03a;
+    --light: #faf7f3;
+    --border: #d8cfc4;
+    --muted: #8a7f74;
+    --green: #3a7d44;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--warm); color: var(--ink); min-height: 100vh; }
+
+  @media screen {
+    body { padding: 40px 20px; }
+    .page-wrapper { max-width: 800px; margin: 0 auto; }
+    .print-btn-bar { display: flex; justify-content: flex-end; margin-bottom: 24px; gap: 12px; align-items: center; }
+    .btn { font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; padding: 10px 24px; border-radius: 4px; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-primary:hover { background: #a84820; }
+    .btn-secondary { background: transparent; color: var(--ink); border: 1.5px solid var(--border); }
+    .btn-secondary:hover { border-color: var(--ink); }
+    .card { background: white; border-radius: 12px; box-shadow: 0 4px 40px rgba(0,0,0,0.08); overflow: hidden; }
+    .field-group { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  }
+  @media screen and (max-width: 600px) { .field-group { grid-template-columns: 1fr; } }
+
+  .header { background: var(--ink); padding: 40px 48px; display: flex; align-items: flex-start; gap: 32px; position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(196,90,42,0.15); }
+  .header::after { content: ''; position: absolute; bottom: -60px; left: 30%; width: 280px; height: 280px; border-radius: 50%; background: rgba(212,160,58,0.08); }
+  .header-text { flex: 1; z-index: 1; }
+  .header-label { font-size: 11px; font-weight: 500; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+  .header h1 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: white; line-height: 1.15; margin-bottom: 12px; }
+  .header p { font-size: 13.5px; color: rgba(255,255,255,0.55); line-height: 1.6; max-width: 400px; }
+
+  .photo-area { width: 115px; height: 138px; border-radius: 8px; border: 2px dashed rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; z-index: 1; overflow: hidden; position: relative; transition: border-color 0.2s; }
+  .photo-area:hover { border-color: rgba(255,255,255,0.45); }
+  .photo-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .photo-area .photo-preview { width: 100%; height: 100%; object-fit: cover; display: none; position: absolute; inset: 0; }
+  .photo-area .photo-label { text-align: center; color: rgba(255,255,255,0.5); font-size: 11px; line-height: 1.6; padding: 8px; pointer-events: none; }
+  .photo-area .photo-icon { font-size: 22px; margin-bottom: 6px; display: block; }
+
+  .form-body { padding: 40px 48px; }
+  .section { margin-bottom: 38px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+  .section-num { width: 28px; height: 28px; background: var(--accent); color: white; border-radius: 50%; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 600; color: var(--ink); }
+  .divider { height: 1px; background: var(--border); margin-bottom: 24px; }
+
+  .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+  label { font-size: 11.5px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
+  input[type="text"], input[type="email"], input[type="date"], input[type="tel"], select, textarea {
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300;
+    padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 6px;
+    background: var(--light); color: var(--ink); transition: border-color 0.2s, background 0.2s;
+    outline: none; width: 100%; -webkit-appearance: none;
+  }
+  select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238a7f74' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+  input:focus, textarea:focus, select:focus { border-color: var(--accent); background: white; }
+  textarea { resize: vertical; min-height: 120px; line-height: 1.7; }
+  .field-hint { font-size: 12px; color: var(--muted); line-height: 1.5; font-style: italic; }
+
+  .callout { padding: 14px 18px; border-radius: 0 6px 6px 0; margin-bottom: 28px; font-size: 13px; line-height: 1.65; }
+  .callout strong { color: var(--ink); }
+  .callout-privacy { background: #f0ede8; border-left: 3px solid var(--gold); color: var(--muted); }
+  .callout-tip { background: #eaf2eb; border-left: 3px solid var(--green); color: #4a6b50; }
+  .callout-tip strong { color: #2d5233; }
+
+  .form-footer { padding: 28px 48px; background: var(--light); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .footer-info { font-size: 12px; color: var(--muted); line-height: 1.7; }
+  .footer-info strong { color: var(--ink); }
+
+  @media print {
+    body { background: white; padding: 0; font-size: 13px; }
+    .no-print { display: none !important; }
+    .page-wrapper { max-width: 100%; }
+    .card { box-shadow: none; border-radius: 0; }
+    .header { padding: 28px 36px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .header::before, .header::after { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .header h1 { font-size: 28px; }
+    .form-body { padding: 24px 36px; }
+    .form-footer { padding: 18px 36px; }
+    input, textarea, select { border: 1px solid #ccc !important; background: #fafafa !important; }
+    .section { page-break-inside: avoid; }
+    textarea { min-height: 80px; }
+    .photo-area { border: 1px solid rgba(255,255,255,0.3) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .callout { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <div class="print-btn-bar no-print">
+    <button class="btn btn-secondary" onclick="clearForm()">Clear form</button>
+    <button class="btn btn-primary" onclick="window.print()">💾 Save as PDF</button>
+  </div>
+
+  <div class="card">
+
+    <!-- HEADER -->
+    <div class="header">
+      <div class="header-text">
+        <div class="header-label">weltwärts Volunteer Programme</div>
+        <h1>Volunteer<br>Profile</h1>
+        <p>Please fill in all fields thoughtfully. Once complete, click "Save as PDF" and email the file to your programme coordinator.</p>
+      </div>
+      <div class="photo-area" id="photoArea" title="Click to upload your photo">
+        <input type="file" accept="image/*" onchange="previewPhoto(event)" id="photoInput">
+        <img class="photo-preview" id="photoPreview" alt="Volunteer photo">
+        <div class="photo-label" id="photoLabel">
+          <span class="photo-icon">📷</span>
+          Upload<br>your photo
+        </div>
+      </div>
+    </div>
+
+    <div class="form-body">
+
+      <div class="callout callout-privacy">
+        <strong>🔒 Data Privacy:</strong> The information you provide will be shared exclusively with your receiving partner organisation. It will not be passed on to any third parties. Please only share what you are comfortable sharing.
+      </div>
+
+      <div class="callout callout-tip no-print">
+        <strong>📸 Important — read before saving as PDF:</strong> Please use <strong>Google Chrome</strong> or <strong>Microsoft Edge</strong>. When the print dialog opens, click <em>"More settings"</em> and enable <strong>"Background graphics"</strong> so your photo appears in the PDF. In Firefox or Safari the photo may not print correctly.
+      </div>
+
+      <!-- 1. Personal Details -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">1</div>
+          <div class="section-title">Personal Details</div>
+        </div>
+        <div class="divider"></div>
+        <div class="field-group">
+          <div class="field"><label>First Name</label><input type="text" placeholder="Your first name"></div>
+          <div class="field"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
+        </div>
+        <div class="field-group">
+          <div class="field"><label>Date of Birth</label><input type="date"></div>
+          <div class="field"><label>Nationality</label><input type="text" placeholder="e.g. German"></div>
+        </div>
+        <div class="field-group">
+          <div class="field"><label>Mobile Number</label><input type="tel" placeholder="+49 ..."></div>
+          <div class="field"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+        </div>
+        <div class="field-group">
+          <div class="field"><label>Home City / Town</label><input type="text" placeholder="e.g. Wuppertal"></div>
+          <div class="field"><label>Current Occupation</label><input type="text" placeholder="e.g. School student, apprentice, gap year…"></div>
+        </div>
+      </div>
+
+      <!-- 2. Languages -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">2</div>
+          <div class="section-title">Languages</div>
+        </div>
+        <div class="divider"></div>
+        <div class="field-group">
+          <div class="field"><label>Mother Tongue</label><input type="text" placeholder="e.g. German"></div>
+          <div class="field">
+            <label>English Level</label>
+            <select>
+              <option value="" disabled selected>Select level</option>
+              <option>Basic (A1–A2)</option>
+              <option>Intermediate (B1–B2)</option>
+              <option>Advanced (C1–C2)</option>
+              <option>Native / near-native</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Other Languages &amp; Level</label>
+          <input type="text" placeholder="e.g. Spanish – intermediate, French – basic, Bahasa Indonesia – none yet">
+        </div>
+      </div>
+
+      <!-- 3. About You & Motivation -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">3</div>
+          <div class="section-title">About You &amp; Your Motivation</div>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>Introduce yourself</label>
+          <textarea placeholder="Who are you? Tell us about your current situation, your personality, and what your life looks like right now. What are your future plans after the volunteer year?"></textarea>
+        </div>
+        <div class="field">
+          <label>Why do you want to do volunteer work abroad?</label>
+          <textarea placeholder="What draws you to weltwärts? What do you hope to contribute, and what do you hope to learn? Why a full year — not just a short trip?"></textarea>
+          <span class="field-hint">The receiving organisation reads this carefully. Be specific and honest — there are no wrong answers.</span>
+        </div>
+      </div>
+
+      <!-- 4. Faith & Community -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">4</div>
+          <div class="section-title">Faith &amp; Community Background</div>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>Church or faith community involvement</label>
+          <textarea placeholder="Our partner organisations are Christian communities. Are you part of a church or faith community? How does faith play a role in your life — if at all? You do not need to be a committed Christian to participate, but please share honestly."></textarea>
+          <span class="field-hint">This helps our partners understand your background and welcome you well into their team.</span>
+        </div>
+        <div class="field">
+          <label>Experience working with children or youth</label>
+          <select>
+            <option value="" disabled selected>Select an option</option>
+            <option>No experience</option>
+            <option>Some experience (e.g. babysitting, younger siblings)</option>
+            <option>Moderate experience (e.g. Sunday school, holiday camps)</option>
+            <option>Significant experience (e.g. youth leader, teacher, tutor)</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Please describe your experience with children or youth</label>
+          <textarea placeholder="E.g. Sunday school teacher, football coach for kids, tutoring, youth group leader, nursery assistant… Write 'none' if not applicable." style="min-height:90px;"></textarea>
+        </div>
+      </div>
+
+      <!-- 5. Skills & Talents -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">5</div>
+          <div class="section-title">Skills, Talents &amp; Experience</div>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>What can you offer?</label>
+          <textarea placeholder="What practical skills, talents, or knowledge do you have that could be useful in a volunteer context? Think broadly: music, art, sport, cooking, crafts, IT, construction, teaching, healthcare, storytelling, photography, languages…"></textarea>
+          <span class="field-hint">Even everyday skills are valuable — don't undersell yourself.</span>
+        </div>
+        <div class="field">
+          <label>Previous volunteer, internship or community service experience</label>
+          <textarea placeholder="Have you volunteered before, done an internship, community service, or been part of a church project? Where, when, what did you do — and what did you learn from it?"></textarea>
+        </div>
+      </div>
+
+      <!-- 6. Living Abroad -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">6</div>
+          <div class="section-title">Living Abroad — Expectations &amp; Adaptability</div>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>What excites you — and what concerns you?</label>
+          <textarea placeholder="What are you most looking forward to about living in a completely different country and culture for a full year? And what worries you — be honest. How do you think you'll handle challenges like homesickness, language barriers, or very different living conditions?"></textarea>
+        </div>
+        <div class="field">
+          <label>What is most important to you at the start of your volunteer year?</label>
+          <textarea placeholder="What do you need to feel welcome and settled in? Are there specific expectations you have of your host family or organisation?" style="min-height:90px;"></textarea>
+        </div>
+      </div>
+
+      <!-- 7. Health -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">7</div>
+          <div class="section-title">Health &amp; Dietary Information</div>
+        </div>
+        <div class="divider"></div>
+        <div class="callout callout-privacy" style="margin-bottom:20px;">
+          <strong>🔒 Confidential:</strong> Health information is shared only with your receiving organisation and programme coordinator — never passed on further.
+        </div>
+        <div class="field-group">
+          <div class="field">
+            <label>Dietary preference / restriction</label>
+            <select>
+              <option value="" disabled selected>Select</option>
+              <option>No restrictions</option>
+              <option>Vegetarian</option>
+              <option>Vegan</option>
+              <option>Halal</option>
+              <option>Kosher</option>
+              <option>Gluten-free</option>
+              <option>Other (describe below)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Known Allergies</label>
+            <input type="text" placeholder="e.g. nuts, penicillin — or write 'none'">
+          </div>
+        </div>
+        <div class="field">
+          <label>Medical conditions or ongoing treatment</label>
+          <textarea placeholder="Please describe any medical conditions, chronic illnesses, physical limitations, or ongoing medication / treatment that we or your host organisation should be aware of. Write 'none' if not applicable." style="min-height:90px;"></textarea>
+        </div>
+      </div>
+
+      <!-- 8. Anything else -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-num">8</div>
+          <div class="section-title">Anything Else?</div>
+        </div>
+        <div class="divider"></div>
+        <div class="field">
+          <label>Additional notes, wishes or questions</label>
+          <textarea placeholder="Is there anything else you'd like your partner organisation or coordinator to know about you? Feel free to leave this blank." style="min-height:80px;"></textarea>
+        </div>
+      </div>
+
+    </div><!-- /form-body -->
+
+    <div class="form-footer">
+      <div class="footer-info">
+        <strong>How to submit:</strong> Click "Save as PDF" → browser opens print dialog.<br>
+        Use <strong>Chrome or Edge</strong>, enable <em>Background graphics</em>, set destination to <em>Save as PDF</em>.<br>
+        Then email the PDF to your programme coordinator.
+      </div>
+      <button class="btn btn-primary no-print" onclick="window.print()">💾 Save as PDF</button>
+    </div>
+
+  </div><!-- /card -->
+</div><!-- /page-wrapper -->
+
+<script>
+  function previewPhoto(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const preview = document.getElementById('photoPreview');
+      const label = document.getElementById('photoLabel');
+      preview.src = e.target.result;
+      preview.style.display = 'block';
+      label.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearForm() {
+    if (!confirm('Clear all fields and start over?')) return;
+    document.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], input[type="tel"], textarea').forEach(el => el.value = '');
+    document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
+    document.getElementById('photoPreview').style.display = 'none';
+    document.getElementById('photoPreview').src = '';
+    document.getElementById('photoLabel').style.display = 'flex';
+    document.getElementById('photoInput').value = '';
+  }
+</script>
+
+</body>
+</html>
