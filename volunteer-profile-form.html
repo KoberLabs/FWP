@@ -33,6 +33,7 @@
   }
   @media screen and (max-width: 600px) { .field-group { grid-template-columns: 1fr; } }
 
+  /* HEADER */
   .header { background: var(--ink); padding: 40px 48px; display: flex; align-items: flex-start; gap: 32px; position: relative; overflow: hidden; }
   .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(196,90,42,0.15); }
   .header::after { content: ''; position: absolute; bottom: -60px; left: 30%; width: 280px; height: 280px; border-radius: 50%; background: rgba(212,160,58,0.08); }
@@ -41,6 +42,7 @@
   .header h1 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: white; line-height: 1.15; margin-bottom: 12px; }
   .header p { font-size: 13.5px; color: rgba(255,255,255,0.55); line-height: 1.6; max-width: 400px; }
 
+  /* PHOTO */
   .photo-area { width: 115px; height: 138px; border-radius: 8px; border: 2px dashed rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; z-index: 1; overflow: hidden; position: relative; transition: border-color 0.2s; }
   .photo-area:hover { border-color: rgba(255,255,255,0.45); }
   .photo-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
@@ -48,6 +50,7 @@
   .photo-area .photo-label { text-align: center; color: rgba(255,255,255,0.5); font-size: 11px; line-height: 1.6; padding: 8px; pointer-events: none; }
   .photo-area .photo-icon { font-size: 22px; margin-bottom: 6px; display: block; }
 
+  /* FORM */
   .form-body { padding: 40px 48px; }
   .section { margin-bottom: 38px; }
   .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
@@ -57,7 +60,7 @@
 
   .field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
   label { font-size: 11.5px; font-weight: 500; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); }
-  input[type="text"], input[type="email"], input[type="date"], input[type="tel"], select, textarea {
+  input[type="text"], input[type="date"], select, textarea {
     font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 300;
     padding: 12px 16px; border: 1.5px solid var(--border); border-radius: 6px;
     background: var(--light); color: var(--ink); transition: border-color 0.2s, background 0.2s;
@@ -71,13 +74,12 @@
   .callout { padding: 14px 18px; border-radius: 0 6px 6px 0; margin-bottom: 28px; font-size: 13px; line-height: 1.65; }
   .callout strong { color: var(--ink); }
   .callout-privacy { background: #f0ede8; border-left: 3px solid var(--gold); color: var(--muted); }
-  .callout-tip { background: #eaf2eb; border-left: 3px solid var(--green); color: #4a6b50; }
-  .callout-tip strong { color: #2d5233; }
 
   .form-footer { padding: 28px 48px; background: var(--light); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 20px; }
   .footer-info { font-size: 12px; color: var(--muted); line-height: 1.7; }
   .footer-info strong { color: var(--ink); }
 
+  /* PRINT */
   @media print {
     body { background: white; padding: 0; font-size: 13px; }
     .no-print { display: none !important; }
@@ -112,9 +114,9 @@
       <div class="header-text">
         <div class="header-label">weltwärts Volunteer Programme</div>
         <h1>Volunteer<br>Profile</h1>
-        <p>Please fill in all fields thoughtfully. Once complete, click "Save as PDF" and email the file to your programme coordinator.</p>
+        <p>Please fill in all fields thoughtfully. Once complete, save as PDF and email the file to your programme coordinator.</p>
       </div>
-      <div class="photo-area" id="photoArea" title="Click to upload your photo">
+      <div class="photo-area" id="photoArea" title="Tap to upload your photo">
         <input type="file" accept="image/*" onchange="previewPhoto(event)" id="photoInput">
         <img class="photo-preview" id="photoPreview" alt="Volunteer photo">
         <div class="photo-label" id="photoLabel">
@@ -130,10 +132,6 @@
         <strong>🔒 Data Privacy:</strong> The information you provide will be shared exclusively with your receiving partner organisation. It will not be passed on to any third parties. Please only share what you are comfortable sharing.
       </div>
 
-      <div class="callout callout-tip no-print">
-        <strong>📸 Important — read before saving as PDF:</strong> Please use <strong>Google Chrome</strong> or <strong>Microsoft Edge</strong>. When the print dialog opens, click <em>"More settings"</em> and enable <strong>"Background graphics"</strong> so your photo appears in the PDF. In Firefox or Safari the photo may not print correctly.
-      </div>
-
       <!-- 1. Personal Details -->
       <div class="section">
         <div class="section-header">
@@ -141,18 +139,17 @@
           <div class="section-title">Personal Details</div>
         </div>
         <div class="divider"></div>
-        <div class="field-group">
-          <div class="field"><label>First Name</label><input type="text" placeholder="Your first name"></div>
-          <div class="field"><label>Last Name</label><input type="text" placeholder="Your last name"></div>
+
+        <div class="field">
+          <label>Full Name</label>
+          <input type="text" placeholder="First and last name">
         </div>
+
         <div class="field-group">
           <div class="field"><label>Date of Birth</label><input type="date"></div>
           <div class="field"><label>Nationality</label><input type="text" placeholder="e.g. German"></div>
         </div>
-        <div class="field-group">
-          <div class="field"><label>Mobile Number</label><input type="tel" placeholder="+49 ..."></div>
-          <div class="field"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
-        </div>
+
         <div class="field-group">
           <div class="field"><label>Home City / Town</label><input type="text" placeholder="e.g. Wuppertal"></div>
           <div class="field"><label>Current Occupation</label><input type="text" placeholder="e.g. School student, apprentice, gap year…"></div>
@@ -166,19 +163,18 @@
           <div class="section-title">Languages</div>
         </div>
         <div class="divider"></div>
-        <div class="field-group">
-          <div class="field"><label>Mother Tongue</label><input type="text" placeholder="e.g. German"></div>
-          <div class="field">
-            <label>English Level</label>
-            <select>
-              <option value="" disabled selected>Select level</option>
-              <option>Basic (A1–A2)</option>
-              <option>Intermediate (B1–B2)</option>
-              <option>Advanced (C1–C2)</option>
-              <option>Native / near-native</option>
-            </select>
-          </div>
+
+        <div class="field">
+          <label>English Level</label>
+          <select>
+            <option value="" disabled selected>Select level</option>
+            <option>Basic (A1–A2)</option>
+            <option>Intermediate (B1–B2)</option>
+            <option>Advanced (C1–C2)</option>
+            <option>Native / near-native</option>
+          </select>
         </div>
+
         <div class="field">
           <label>Other Languages &amp; Level</label>
           <input type="text" placeholder="e.g. Spanish – intermediate, French – basic, Bahasa Indonesia – none yet">
@@ -285,7 +281,6 @@
               <option>Vegetarian</option>
               <option>Vegan</option>
               <option>Halal</option>
-              <option>Kosher</option>
               <option>Gluten-free</option>
               <option>Other (describe below)</option>
             </select>
@@ -318,9 +313,8 @@
 
     <div class="form-footer">
       <div class="footer-info">
-        <strong>How to submit:</strong> Click "Save as PDF" → browser opens print dialog.<br>
-        Use <strong>Chrome or Edge</strong>, enable <em>Background graphics</em>, set destination to <em>Save as PDF</em>.<br>
-        Then email the PDF to your programme coordinator.
+        <strong>How to submit:</strong> Click "Save as PDF" → your device will open a save or share dialog.<br>
+        Save the PDF with your name and email it to your programme coordinator.
       </div>
       <button class="btn btn-primary no-print" onclick="window.print()">💾 Save as PDF</button>
     </div>
@@ -345,7 +339,7 @@
 
   function clearForm() {
     if (!confirm('Clear all fields and start over?')) return;
-    document.querySelectorAll('input[type="text"], input[type="email"], input[type="date"], input[type="tel"], textarea').forEach(el => el.value = '');
+    document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach(el => el.value = '');
     document.querySelectorAll('select').forEach(el => el.selectedIndex = 0);
     document.getElementById('photoPreview').style.display = 'none';
     document.getElementById('photoPreview').src = '';
