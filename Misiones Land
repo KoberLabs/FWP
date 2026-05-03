@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Misiones Land Investment — Full Analysis</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500&display=swap');
+ 
+  :root {
+    --red-earth: #8B2E14;
+    --red-light: #C1421F;
+    --cream: #F5F0E8;
+    --sand: #E8DFC8;
+    --dark: #1A1510;
+    --mid: #4A3728;
+    --green-deep: #1E3D1A;
+    --green-mid: #2E5C28;
+    --green-light: #4A8040;
+    --gold: #C8900A;
+    --gold-light: #E8B020;
+    --warning: #CC4400;
+    --neutral: #6B5A4A;
+  }
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+ 
+  .cover {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 60px 48px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 40%;
+    background: linear-gradient(135deg, var(--red-earth) 0%, var(--green-deep) 100%);
+    opacity: 0.4;
+    clip-path: polygon(30% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+ 
+  .cover-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+ 
+  .cover h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.1;
+    max-width: 600px;
+    margin-bottom: 16px;
+  }
+ 
+  .cover h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+ 
+  .cover-sub {
+    font-size: 13px;
+    opacity: 0.6;
+    font-family: 'IBM Plex Mono', monospace;
+    margin-top: 32px;
+  }
+ 
+  .meta-strip {
+    background: var(--red-earth);
+    color: var(--cream);
+    display: flex;
+    gap: 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+  }
+ 
+  .meta-item {
+    padding: 10px 20px;
+    border-right: 1px solid rgba(255,255,255,0.2);
+    flex: 1;
+  }
+ 
+  .meta-item span { display: block; opacity: 0.6; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 2px; }
+ 
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+ 
+  section {
+    padding: 48px 0 40px;
+    border-bottom: 1px solid var(--sand);
+  }
+ 
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--red-earth);
+    margin-bottom: 12px;
+  }
+ 
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(20px, 3vw, 28px);
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+ 
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+    margin: 28px 0 10px;
+    color: var(--mid);
+  }
+ 
+  p { margin-bottom: 14px; font-size: 14px; }
+ 
+  .verdict-box {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 28px 32px;
+    margin: 24px 0;
+    border-left: 4px solid var(--gold);
+    position: relative;
+  }
+ 
+  .verdict-box .verdict-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+ 
+  .verdict-box p {
+    font-size: 15px;
+    margin: 0;
+    line-height: 1.6;
+  }
+ 
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1px;
+    background: var(--sand);
+    margin: 20px 0;
+    border: 1px solid var(--sand);
+  }
+ 
+  .data-cell {
+    background: var(--cream);
+    padding: 20px;
+  }
+ 
+  .data-cell .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--neutral);
+    margin-bottom: 6px;
+  }
+ 
+  .data-cell .value {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--red-earth);
+  }
+ 
+  .data-cell .note {
+    font-size: 11px;
+    color: var(--neutral);
+    margin-top: 4px;
+  }
+ 
+  .scenario-card {
+    border: 1px solid var(--sand);
+    margin: 16px 0;
+    overflow: hidden;
+  }
+ 
+  .scenario-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--sand);
+  }
+ 
+  .scenario-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--red-earth);
+    opacity: 0.4;
+    line-height: 1;
+  }
+ 
+  .scenario-title {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+  }
+ 
+  .scenario-rating {
+    margin-left: auto;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+ 
+  .rating-high { background: var(--green-mid); color: white; }
+  .rating-mid { background: var(--gold); color: white; }
+  .rating-low { background: var(--warning); color: white; }
+  .rating-no { background: var(--neutral); color: white; }
+ 
+  .scenario-body {
+    padding: 20px;
+  }
+ 
+  .scenario-body p { font-size: 13px; margin-bottom: 10px; }
+ 
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+ 
+  .pros-cons {
+    padding: 14px 16px;
+    font-size: 12px;
+  }
+ 
+  .pros-cons h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+ 
+  .pros { background: rgba(46, 92, 40, 0.08); border-left: 3px solid var(--green-mid); }
+  .pros h4 { color: var(--green-mid); }
+ 
+  .cons { background: rgba(204, 68, 0, 0.07); border-left: 3px solid var(--warning); }
+  .cons h4 { color: var(--warning); }
+ 
+  .pros-cons li { list-style: none; padding: 3px 0; padding-left: 14px; position: relative; }
+  .pros-cons li::before { content: '→'; position: absolute; left: 0; opacity: 0.5; }
+ 
+  .zone-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin: 16px 0;
+  }
+ 
+  .zone-table th {
+    background: var(--dark);
+    color: var(--cream);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+ 
+  .zone-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--sand);
+    vertical-align: top;
+    line-height: 1.4;
+  }
+ 
+  .zone-table tr:hover td { background: var(--sand); }
+ 
+  .tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+ 
+  .tag-best { background: var(--green-mid); color: white; }
+  .tag-good { background: var(--gold); color: white; }
+  .tag-risky { background: var(--warning); color: white; }
+  .tag-avoid { background: var(--neutral); color: white; }
+ 
+  .risk-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 6px 0;
+  }
+ 
+  .risk-label { font-size: 12px; width: 180px; flex-shrink: 0; }
+  .risk-bar { flex: 1; height: 6px; background: var(--sand); border-radius: 3px; overflow: hidden; }
+  .risk-fill { height: 100%; border-radius: 3px; }
+  .risk-high { background: var(--warning); width: 85%; }
+  .risk-med { background: var(--gold); width: 55%; }
+  .risk-low { background: var(--green-mid); width: 25%; }
+ 
+  .final-box {
+    background: var(--green-deep);
+    color: var(--cream);
+    padding: 36px 40px;
+    margin: 32px 0 0;
+    border-top: 4px solid var(--gold);
+  }
+ 
+  .final-box h2 {
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+ 
+  .final-box p { font-size: 14px; margin-bottom: 12px; opacity: 0.9; }
+ 
+  .checklist { margin: 16px 0; }
+  .checklist li {
+    list-style: none;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+ 
+  .checklist li .num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--gold-light);
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 20px;
+  }
+ 
+  .disclaimer {
+    padding: 16px 24px;
+    font-size: 11px;
+    color: var(--neutral);
+    font-family: 'IBM Plex Mono', monospace;
+    line-height: 1.5;
+    background: var(--sand);
+    border-top: 1px solid var(--sand);
+  }
+ 
+  @media (max-width: 600px) {
+    .cover { padding: 40px 24px 32px; }
+    .container { padding: 0 20px; }
+    .two-col { grid-template-columns: 1fr; }
+    .meta-strip { flex-wrap: wrap; }
+    .meta-item { min-width: 50%; }
+  }
+</style>
+</head>
+<body>
+ 
+<div class="cover">
+  <div class="cover-label">Confidential Investment Analysis · May 2026</div>
+  <h1>Should you buy land<br>in <em>Misiones</em>?</h1>
+  <p style="font-size:15px; opacity:0.7; max-width:480px; margin-top:12px; font-weight:300;">A full financial, strategic, and personal analysis — cross-referencing current market data, the yerba mate crisis, your portfolio context, and your life plan.</p>
+  <div class="cover-sub">Prepared for David · Wuppertal → Misiones scenario · $30,000–$50,000 budget · 25 ha target</div>
+</div>
+ 
+<div class="meta-strip">
+  <div class="meta-item"><span>Budget</span>$30–50k USD</div>
+  <div class="meta-item"><span>Target</span>25+ hectares</div>
+  <div class="meta-item"><span>Market</span>Distressed / Buyer's</div>
+  <div class="meta-item"><span>Horizon</span>7–15 years</div>
+  <div class="meta-item"><span>Data as of</span>May 2026</div>
+</div>
+ 
+<div class="container">
+ 
+  <!-- SECTION 1: MARKET CONTEXT -->
+  <section>
+    <div class="section-label">01 · Market Reality</div>
+    <h2>The yerba crisis is your buying window</h2>
+ 
+    <p>The INYM deregulation via Milei's DNU 70/2023 stripped the institute of its price-setting powers. The consequences are severe and documented in real-time. Producers are receiving between $160–$220 ARS per kilo of green leaf — while production costs run at $430/kg. That's not a margin squeeze. That's a structural loss on every harvest.</p>
+ 
+    <p>The producer's share of the shelf price collapsed from a historical 23% to roughly 13% today. Many small colonos cannot cover harvest costs and are leaving kilos of hoja verde rotting on the plant. The next logical step is what you're already observing: <strong>forced land sales</strong>.</p>
+ 
+    <div class="data-grid">
+      <div class="data-cell">
+        <div class="label">Producer price (green leaf)</div>
+        <div class="value">$160–220</div>
+        <div class="note">ARS/kg. Was ~$400 two years ago</div>
+      </div>
+      <div class="data-cell">
+        <div class="label">Production cost</div>
+        <div class="value">$430+</div>
+        <div class="note">ARS/kg — they lose on every sale</div>
+      </div>
+      <div class="data-cell">
+        <div class="label">Shelf price drop (2023–26)</div>
+        <div class="value">−45.7%</div>
+        <div class="note">Real terms. Consumer benefits, producer bleeds</div>
+      </div>
+      <div class="data-cell">
+        <div class="label">Exports 2025</div>
+        <div class="value">+7.3%</div>
+        <div class="note">57.9M kg / $117M USD. Bright spot for brand play</div>
+      </div>
+      <div class="data-cell">
+        <div class="label">Land listings (Misiones rural)</div>
+        <div class="value">Low</div>
+        <div class="note">Supply is rising as colonos sell — prices softening</div>
+      </div>
+      <div class="data-cell">
+        <div class="label">Legal situation</div>
+        <div class="value">Fluid</div>
+        <div class="note">Federal court challenges pending. Possible partial reversal.</div>
+      </div>
+    </div>
+ 
+    <div class="verdict-box">
+      <div class="verdict-label">Strategic Reading</div>
+      <p>A crisis that forces 13,000 small producers to consider selling their chacras is — from a buyer's perspective — a generational pricing window. The land doesn't become less fertile. The water doesn't disappear. The red soil doesn't degrade. What changes is the desperation of the seller. You are positioned to benefit from this if you act with discipline on price and location.</p>
+    </div>
+  </section>
+ 
+  <!-- SECTION 2: LAND PRICE BENCHMARK -->
+  <section>
+    <div class="section-label">02 · Land Pricing</div>
+    <h2>What $30–50k actually buys you</h2>
+ 
+    <p>Based on current market data from Argenprop, Zonaprop, and Chacras Misioneras, here is the realistic pricing map for rural land in Misiones as of 2026:</p>
+ 
+    <table class="zone-table">
+      <thead>
+        <tr>
+          <th>Zone</th>
+          <th>Price/ha (USD)</th>
+          <th>25 ha cost</th>
+          <th>Your budget fit</th>
+          <th>Tag</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Near Posadas / Candelaria corridor</strong><br>On paved road, 20min to capital</td>
+          <td>$5,000–$10,000</td>
+          <td>$125k–$250k</td>
+          <td>Way over budget</td>
+          <td><span class="tag tag-avoid">Out of range</span></td>
+        </tr>
+        <tr>
+          <td><strong>Ruta 14 corridor</strong><br>Aristóbulo del Valle, San Vicente</td>
+          <td>$2,000–$4,000</td>
+          <td>$50k–$100k</td>
+          <td>Top end only, small parcel</td>
+          <td><span class="tag tag-risky">Stretch</span></td>
+        </tr>
+        <tr>
+          <td><strong>Oberá department interior</strong><br>Leandro N. Alem, Cerro Corá zone, Campo Grande</td>
+          <td>$1,000–$2,000</td>
+          <td>$25k–$50k</td>
+          <td>✓ Target zone</td>
+          <td><span class="tag tag-best">Sweet spot</span></td>
+        </tr>
+        <tr>
+          <td><strong>Uruguay River corridor</strong><br>San Javier, Concepción de la Sierra</td>
+          <td>$800–$1,500</td>
+          <td>$20k–$37k</td>
+          <td>Under budget — possible +size</td>
+          <td><span class="tag tag-good">Value</span></td>
+        </tr>
+        <tr>
+          <td><strong>Deep interior / no asphalt</strong><br>7+ km from paved road</td>
+          <td>$400–$800</td>
+          <td>$10k–$20k</td>
+          <td>Cheap for a reason</td>
+          <td><span class="tag tag-avoid">Avoid</span></td>
+        </tr>
+      </tbody>
+    </table>
+ 
+    <p><strong>What to prioritize within your budget:</strong> Water (arroyo, vertiente, or verified underground) is the single most important value driver in Misiones. A 20 ha chacra with a permanent stream is worth more than 40 ha without one — both for resale and for any productive use. Electricity access matters second. Paved road access third.</p>
+ 
+    <p>A 25 ha chacra in the Oberá interior with an arroyo, electricity nearby, and a basic structure is realistically priced at <strong>$30,000–$45,000 USD right now</strong> — and sellers are motivated. A year ago, the same property would have been $40,000–$60,000.</p>
+  </section>
+ 
+  <!-- SECTION 3: SCENARIOS -->
+  <section>
+    <div class="section-label">03 · Use Cases</div>
+    <h2>Five scenarios — ranked for your situation</h2>
+ 
+    <!-- Scenario A: Land bank -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <div class="scenario-num">A</div>
+        <div class="scenario-title">Pure land bank — buy, hold, resell (7–15 year horizon)</div>
+        <div class="scenario-rating rating-high">★★★★ Viable</div>
+      </div>
+      <div class="scenario-body">
+        <p>Buy at the bottom of a crisis cycle, hold with zero or minimal productive use, and resell when Argentina macro stabilizes or a specific opportunity (buyer, development, inheritance) presents itself. This requires absolutely nothing from you except paying annual taxes (inmobiliario), which in Misiones is negligible in USD terms — often $50–$200/year for rural land.</p>
+ 
+        <p><strong>Historical reference:</strong> Argentine rural land in USD has recovered sharply after every major crisis (2001, 2018). The 1990s deregulation of the yerba sector also crashed land values — and they recovered within a decade as the sector consolidated. The pattern is structural, not coincidental.</p>
+ 
+        <div class="two-col">
+          <ul class="pros-cons pros">
+            <h4>For this</h4>
+            <li>Near-zero carrying cost</li>
+            <li>Land doesn't default or evaporate</li>
+            <li>Crisis timing = maximum discount</li>
+            <li>Family can informally oversee</li>
+            <li>Keeps Misiones option alive</li>
+          </ul>
+          <ul class="pros-cons cons">
+            <h4>Against this</h4>
+            <li>Zero income for 7–10 years</li>
+            <li>Capital locked (illiquid)</li>
+            <li>Resale takes 6–24 months</li>
+            <li>Title risks if not checked properly</li>
+            <li>Needs family to keep eye on it</li>
+          </ul>
+        </div>
+ 
+        <p><strong>ROI estimate:</strong> At $35,000 purchase (25 ha, Oberá zone), realistic resale in 10 years at $60,000–$90,000 USD in a normalized Argentina = 70–157% total return, ~5–10% annualized in USD. No inflation hedge needed since it's USD-denominated. This is comparable to your Enbridge/Cheniere hold thesis — capital preservation + moderate USD appreciation with asymmetric upside.</p>
+      </div>
+    </div>
+ 
+    <!-- Scenario B: Yerba brand -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <div class="scenario-num">B</div>
+        <div class="scenario-title">Yerba mate brand for Europe — land as supply anchor</div>
+        <div class="scenario-rating rating-high">★★★★ High potential, not land-dependent</div>
+      </div>
+      <div class="scenario-body">
+        <p>This is your highest-upside scenario — but here's the critical insight: <strong>you do not need to own yerba land to run the brand.</strong> The crisis means producers are desperate for buyers. You can negotiate long-term supply contracts at rock-bottom prices with existing colonos, right now, without owning a single hectare.</p>
+ 
+        <p>That said, owning land WITH existing yerba plants adds something that money can't fully replicate: the story. European B2B buyers for premium mate — especially in Germany, the Netherlands, Spain — increasingly want provenance, traceability, and a human face behind the product. "My family's land in Misiones, on the red soil of the Atlantic Forest" is a marketing asset.</p>
+ 
+        <p><strong>The smart play:</strong> Buy land that already has some yerba plants as a secondary feature — not as your production base, but as your story and your symbolic supply source. You buy raw leaf from neighboring colonos at crisis prices, process through an existing secadero, and brand it from "your" region. This works.</p>
+ 
+        <p>Export data confirms the market is real: $117M USD in yerba exports in 2025, with Spain among the top destinations. Europe's mate consumption is growing, and the premium segment is underdeveloped. Your German institutional profile + Spanish market knowledge + Argentine origin = a genuine competitive edge that is hard to replicate.</p>
+ 
+        <div class="two-col">
+          <ul class="pros-cons pros">
+            <h4>For land + brand</h4>
+            <li>Crisis prices for supply contracts</li>
+            <li>Land gives authentic provenance story</li>
+            <li>Spain export growing (your target)</li>
+            <li>You already have supply contacts</li>
+            <li>Family can be the face in Misiones</li>
+          </ul>
+          <ul class="pros-cons cons">
+            <h4>Against / risks</h4>
+            <li>Needs capital beyond land (€20–40k more)</li>
+            <li>EU food import regulations (BIO certification if premium)</li>
+            <li>Brand takes 2–3 years to generate revenue</li>
+            <li>You still need distribution in Europe</li>
+            <li>Competing with established Argentine brands</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Scenario C: Family agriculture -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <div class="scenario-num">C</div>
+        <div class="scenario-title">Family-managed diversified agriculture / silvopastoral</div>
+        <div class="scenario-rating rating-mid">★★★ Viable with the right family arrangement</div>
+      </div>
+      <div class="scenario-body">
+        <p>Involve a family member — ideally one with local knowledge and available time — to manage basic productive use of the land. Options that work in Misiones with minimal capital and ongoing management:</p>
+ 
+        <p><strong>Silvopastoral (low-density cattle + timber):</strong> A few head of cattle on 20–25 ha, managed by a local partner on a profit-share basis. Covers land maintenance costs and generates minimal income. Timber species like pine, eucalyptus, or native lapachos appreciate over time and can be harvested in 10–15 years. Common model in Misiones.</p>
+ 
+        <p><strong>Stevia / diversified crops:</strong> The national government is actually pushing diversification away from yerba. Stevia is growing in demand in Europe and requires similar climate conditions to yerba. Lower price floor risk than mate.</p>
+ 
+        <p>The critical risk here is honest: <strong>family caretaking arrangements across continents, without a formal structure and salary, have a mixed track record.</strong> This needs a clear written agreement — what they manage, what they receive, and who decides what — before you sign any escritura.</p>
+      </div>
+    </div>
+ 
+    <!-- Scenario D: Ecotourism -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <div class="scenario-num">D</div>
+        <div class="scenario-title">Ecotourism / international tourism</div>
+        <div class="scenario-rating rating-low">★★ Very hard from Europe, long horizon</div>
+      </div>
+      <div class="scenario-body">
+        <p>Misiones is objectively one of Argentina's most beautiful provinces — Iguazú, Moconá, Atlantic Forest biodiversity, the red-soil landscape. International tourists come. The infrastructure gap is real, which is both the problem and the opportunity.</p>
+ 
+        <p>The honest assessment: developing international-quality eco-lodging in Misiones requires $80,000–$200,000+ in investment beyond land price, a minimum of 3–5 years before cash-flow positive, and either you being physically present or a highly trusted local operator running it for you. Without one of those two conditions, it doesn't work. Not as a remotely managed project from Germany.</p>
+ 
+        <p>This is a Phase 2 scenario — worth keeping as a 10-year option if you eventually relocate to Misiones or build the right management structure. Do not plan the land purchase around this use case today.</p>
+      </div>
+    </div>
+ 
+    <!-- Scenario E: Future relocation -->
+    <div class="scenario-card">
+      <div class="scenario-header">
+        <div class="scenario-num">E</div>
+        <div class="scenario-title">Buy land as a future home / relocation base</div>
+        <div class="scenario-rating rating-no">★★ Not your primary plan right now</div>
+      </div>
+      <div class="scenario-body">
+        <p>You've named Spain as your primary relocation destination and Paraguay as backup. Misiones as a home is "very inconclusive" by your own words. Buying land with the primary aim of eventually living there only makes sense if: (a) it doesn't require generating income from the land, and (b) you're comfortable that it might sit unused for 10+ years.</p>
+ 
+        <p>This is an acceptable secondary rationale — roots, identity, family proximity, the emotional weight of owning land in your hometown — but it shouldn't be your financial justification. Call it what it is: an emotional asset with financial upside, not primarily a financial asset. There's nothing wrong with that, but the numbers shouldn't pretend otherwise.</p>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- SECTION 4: WHERE TO BUY -->
+  <section>
+    <div class="section-label">04 · Location Strategy</div>
+    <h2>Where to buy — as your Misiones real estate advisor</h2>
+ 
+    <p>Given your profile (family in Oberá, budget of $30–50k, 25 ha target, long hold horizon, possible yerba brand, no immediate income need from land), here is my zone-by-zone ranking:</p>
+ 
+    <h3>Zone 1 · Oberá department interior — Recommended</h3>
+    <p>This is your home ground. You know the people. Your family is here. The land market is soft right now precisely because of the yerba crisis — this is the epicenter of small-producer distress. You are most likely to find motivated sellers, clean titles (through local escribanos you can trust via family connections), and a realistic on-the-ground informal "manager" (a cousin, neighbor, or family friend willing to keep an eye on things for a small arrangement).</p>
+    <p>Focus on the corridor between Oberá, Leandro N. Alem, Campo Grande, and Dos de Mayo. Look for: arroyo or vertiente, electricity within 500m, basic access road (not necessarily paved), and some existing vegetation (avoids you having to fence and clear from scratch). Price target: $28,000–$40,000 for 20–30 ha.</p>
+ 
+    <h3>Zone 2 · Cerro Corá / Mártires area — Strong second option</h3>
+    <p>Slightly more remote but very fertile, with documented arroyo access in listings (Cuñapirú river system). Some existing structures in listings. Eco-tourism potential is real here due to the landscape. Lower prices: possibly 25 ha for $20,000–$30,000. The tradeoff is distance from Oberá family base. Good if you want more land for the same money.</p>
+ 
+    <h3>Zone 3 · Uruguay River zone (San Javier, Concepción) — Value play, more remote</h3>
+    <p>Beautiful land, riverside properties available, but more distant from Oberá. If family can't easily reach it, the management problem becomes acute. Only if you find something with a particularly good water feature and a clear long-term ecotourism plan.</p>
+ 
+    <h3>What to demand non-negotiably</h3>
+    <p>Before any offer: verify escritura with a local escribano (not the seller's). Check for occupants (occupantes/intrusos is a real risk in Misiones rural land — formal or informal squatting). Confirm inmobiliario provincial taxes are current. Get INTA soil classification (6a is ideal for versatile use). Confirm water source is permanent, not seasonal.</p>
+ 
+    <div class="verdict-box">
+      <div class="verdict-label">Advisor Verdict — Location</div>
+      <p>Buy in Oberá department, within 15–20 km of the city. Family proximity solves the management problem. You know the market. You can leverage family networks to find off-market deals at distressed prices. The land is fertile, water is present, and Misiones' long-term ecological value is underappreciated globally. This is not Patagonia or the Pampa — it is chronically undervalued precisely because it's green and remote and provincial. That's your opportunity.</p>
+    </div>
+  </section>
+ 
+  <!-- SECTION 5: RISK ANALYSIS -->
+  <section>
+    <div class="section-label">05 · Risk Matrix</div>
+    <h2>What can go wrong — honest assessment</h2>
+ 
+    <div class="risk-bar-container">
+      <div class="risk-label">Argentina macro / peso risk</div>
+      <div class="risk-bar"><div class="risk-fill risk-high"></div></div>
+      <span style="font-size:11px; font-family:monospace; color:var(--warning)">HIGH</span>
+    </div>
+    <p style="font-size:12px; color:var(--neutral); margin-left:190px; margin-top:-4px; margin-bottom:12px;">Mitigated because land is priced and held in USD. Your euros buy USD-denominated assets. Peso inflation doesn't erode land value directly.</p>
+ 
+    <div class="risk-bar-container">
+      <div class="risk-label">Illiquidity</div>
+      <div class="risk-bar"><div class="risk-fill risk-high"></div></div>
+      <span style="font-size:11px; font-family:monospace; color:var(--warning)">HIGH</span>
+    </div>
+    <p style="font-size:12px; color:var(--neutral); margin-left:190px; margin-top:-4px; margin-bottom:12px;">Selling Misiones rural land takes 6–24 months minimum. This is not a liquid asset. Never put in money you might need in 3–5 years.</p>
+ 
+    <div class="risk-bar-container">
+      <div class="risk-label">Family management failure</div>
+      <div class="risk-bar"><div class="risk-fill risk-med"></div></div>
+      <span style="font-size:11px; font-family:monospace; color:var(--gold)">MEDIUM</span>
+    </div>
+    <p style="font-size:12px; color:var(--neutral); margin-left:190px; margin-top:-4px; margin-bottom:12px;">A real risk on long horizons. Mitigate with a simple written arrangement (even informal), defined expectations, and regular visits.</p>
+ 
+    <div class="risk-bar-container">
+      <div class="risk-label">Title / legal issues</div>
+      <div class="risk-bar"><div class="risk-fill risk-med"></div></div>
+      <span style="font-size:11px; font-family:monospace; color:var(--gold)">MEDIUM</span>
+    </div>
+    <p style="font-size:12px; color:var(--neutral); margin-left:190px; margin-top:-4px; margin-bottom:12px;">Misiones has a significant stock of land with messy succession titles or informal occupants. Solvable with a good local escribano before purchase.</p>
+ 
+    <div class="risk-bar-container">
+      <div class="risk-label">Opportunity cost (vs European assets)</div>
+      <div class="risk-bar"><div class="risk-fill risk-med"></div></div>
+      <span style="font-size:11px; font-family:monospace; color:var(--gold)">MEDIUM</span>
+    </div>
+    <p style="font-size:12px; color:var(--neutral); margin-left:190px; margin-top:-4px; margin-bottom:12px;">€35–50k in Spain buys nothing useful (maybe a parking space in Madrid). In ETFs, it generates ~€2,500–4,000/year passively. The land needs to outperform that over 10 years — realistic but not guaranteed.</p>
+ 
+    <div class="risk-bar-container">
+      <div class="risk-label">Wegzugsteuer exposure</div>
+      <div class="risk-bar"><div class="risk-fill risk-low"></div></div>
+      <span style="font-size:11px; font-family:monospace; color:var(--green-mid)">LOW</span>
+    </div>
+    <p style="font-size:12px; color:var(--neutral); margin-left:190px; margin-top:-4px; margin-bottom:12px;">Foreign real estate is generally outside the Wegzugsteuer scope (which targets share portfolios). But confirm with your Steuerberater before purchasing.</p>
+  </section>
+ 
+  <!-- SECTION 6: EUROPE COMPARISON -->
+  <section>
+    <div class="section-label">06 · Opportunity Cost</div>
+    <h2>What else does $35–50k buy you?</h2>
+ 
+    <table class="zone-table">
+      <thead>
+        <tr>
+          <th>Alternative</th>
+          <th>Annual return</th>
+          <th>Liquidity</th>
+          <th>Strategic value for you</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Misiones chacra, 25 ha</strong></td>
+          <td>$0 income, 5–10% p.a. capital in USD over 10yr</td>
+          <td>Very low</td>
+          <td>High — family, roots, brand anchor, relocation option</td>
+        </tr>
+        <tr>
+          <td><strong>ETF portfolio (Trade Republic)</strong></td>
+          <td>~7% p.a. long-term, liquid</td>
+          <td>Instant</td>
+          <td>Medium — pure financial, no strategic upside beyond money</td>
+        </tr>
+        <tr>
+          <td><strong>Yerba brand capital (no land)</strong></td>
+          <td>0 to very high — binary bet</td>
+          <td>None (illiquid)</td>
+          <td>Very high if brand succeeds, total loss if it doesn't</td>
+        </tr>
+        <tr>
+          <td><strong>Property in Spain</strong></td>
+          <td>€35k buys almost nothing livable</td>
+          <td>Medium</td>
+          <td>Low at this ticket size. Only useful at €150k+</td>
+        </tr>
+        <tr>
+          <td><strong>KfW ERP startup loan (while in Germany)</strong></td>
+          <td>Leverages your own capital — €100k at low rate</td>
+          <td>N/A</td>
+          <td>Very high — time-sensitive, closes on departure from DE</td>
+        </tr>
+      </tbody>
+    </table>
+ 
+    <p>The KfW comparison is the most important: you flagged it yourself as time-sensitive. A €100k startup loan at a favorable rate, used to launch the yerba brand or consultancy, is a better capital allocation than $35k in illiquid land — from a pure financial perspective. But they're not mutually exclusive. Land doesn't require ongoing capital deployment. You pay once and leave it.</p>
+  </section>
+ 
+</div>
+ 
+<!-- FINAL RECOMMENDATION -->
+<div class="container">
+  <div class="final-box">
+    <div class="section-label" style="color: var(--gold-light)">07 · Final Recommendation</div>
+    <h2>Buy — but with conditions</h2>
+ 
+    <p>My honest assessment, combining the financial and emotional dimensions: <strong>buying land in Misiones at $30–45k USD is justified</strong>, given the current distressed market, your existing family anchor there (the Oberá school property), your long time horizon, and the strategic optionality it creates for the yerba brand.</p>
+ 
+    <p>This is not the highest-ROI move in isolation. ETFs beat it on pure financial terms over 10 years with certainty. But you are not choosing between a purely financial life and a purely financial investment. The land gives you something no ETF can: a physical stake in a place that matters to you, with family close by, at a price that may never be this low again.</p>
+ 
+    <p><strong>The conditions that make this a yes rather than a maybe:</strong></p>
+ 
+    <ul class="checklist">
+      <li><div class="num">01</div> Buy near Oberá. Not deep interior. Not near Posadas (too expensive). The Oberá department is the sweet spot: your family is there, you know the market, and it solves the management problem informally.</li>
+      <li><div class="num">02</div> Water is non-negotiable. Permanent arroyo or verified vertiente. This is the single biggest value differentiator in Misiones rural land. Walk the property in person, or send a trusted family member to verify before signing.</li>
+      <li><div class="num">03</div> Get a local escribano to verify title before any offer. Not after. Occupant issues and succession title problems are common. Budget $500–1,000 for this due diligence.</li>
+      <li><div class="num">04</div> Negotiate hard. Sellers are motivated. 20–30% below asking price is realistic in this market. Your $35k offer on a $48k asking price is entirely reasonable right now.</li>
+      <li><div class="num">05</div> Have one family member — not a vague commitment, a named person — who agrees in writing (even informally) to check on the property twice a year, pay the inmobiliario, and alert you to anything unusual.</li>
+      <li><div class="num">06</div> Do not plan for income in the first 5 years. The land banks. If something productive emerges (a neighbor wants to graze cattle, a cousin wants to plant something), great — but do not depend on it.</li>
+      <li><div class="num">07</div> Confirm Wegzugsteuer treatment with your Steuerberater before purchase. Foreign real estate is generally outside scope but get it in writing before your Germany exit.</li>
+    </ul>
+ 
+    <p style="margin-top:20px; opacity:0.7; font-size:13px;"><strong>What this is not:</strong> This is not a business investment with an ROI model. It is a long-duration, USD-denominated, emotionally-rational asset purchase at a historically distressed entry point. Treat it as a 10-year hold with optionality. That's the honest framing — and on those terms, it works.</p>
+  </div>
+</div>
+ 
+<div class="disclaimer">
+  This analysis is prepared for personal use. It is not financial or legal advice. Market data sourced from Argenprop, Zonaprop, INYM, CEPA, Ambito, and Misiones regional press as of May 2026. Land prices in Argentina are highly local and negotiated — always verify current listings with a local inmobiliaria or escribano before any transaction.
+</div>
+ 
+</body>
+</html>
